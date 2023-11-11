@@ -52,12 +52,6 @@ char rxbuf[100];		// Buffer to receive data from zm
 
 int main (int argc, char *argv[])
 {
-	// First check if the mandatory parameters are present
-	if (argc!=3)
-	{
-		printf("Number of parameters is wrong. Received: %d should be 2.\n",argc);
-		return(1);
-	}
 	if(strcmp(argv[1],"h")==0)
 	{
 		printf("ZM reader program, Version %s \n %s \n",Version, HelpText);
@@ -66,9 +60,21 @@ int main (int argc, char *argv[])
 	if(strcmp(argv[1],"t")==0)
 	{
 		// Testmode, produces a demo output
-	
+		 printf("{\"level\":\"12345\",\"lock\":\"0\",\"open\":\"0\",\"wasOpen\":\"0\",\"temp\":\"12345\",\"version\":\"0\"}\n");
 	    return(0);
 	}
+	// First check if the mandatory parameters are present
+	if (argc!=3)
+	{
+		printf("Number of parameters is wrong. Received: %d should be 2.\n",argc-1);
+		for (int i=0; i< argc; i++)
+		{
+			printf("argv[%d] is %s\n", i, argv[i]);
+		}
+		return(1);
+	}
+
+
 	// Part 1
 	// Prepare the communication structures
 	// termios is a nasty thing ...
